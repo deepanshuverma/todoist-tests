@@ -11,18 +11,21 @@ public class Steps {
     private static final String BASE_URL = "https://api.todoist.com";
     private static final String TOKEN = "";
 
-    private static Response response;
+    private static Response r;
 
     @When("I request all tasks")
-    public void i_request_all_tasks() {
-        RestAssured.baseURI = BASE_URL;
-        RequestSpecification request = RestAssured.given();
+    public void iRequestAllTasks() {
+        RestAssured.baseURI=BASE_URL;
+       RequestSpecification request = RestAssured.given();
         request.header("Authorization", "Bearer " + TOKEN);
-        response = request.get("/rest/v1/tasks");
-    }
+        System.out.println("About to send the request...");
+        r = request.get("/rest/v1/tasks");
+}
 
     @Then("I should get a 200 response")
     public void i_should_get_a_200_response() {
-        Assert.assertEquals(200, response.getStatusCode());
+
+        Assert.assertEquals(200,r.getStatusCode());
+
     }
 }
